@@ -26,16 +26,16 @@ RUN set -eux; \
 	apkArch="$(apk --print-arch)"; \
 	case "$apkArch" in \
 		'x86_64') \
-			url='https://download.docker.com/linux/static/stable/x86_64/docker-20.10.5.tgz'; \
+			url="https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKER_VERSION}.tgz"; \
 			;; \
 		'armhf') \
-			url='https://download.docker.com/linux/static/stable/armel/docker-20.10.5.tgz'; \
+			url="https://download.docker.com/linux/static/stable/armel/docker-${DOCKER_VERSION}.tgz"; \
 			;; \
 		'armv7') \
-			url='https://download.docker.com/linux/static/stable/armhf/docker-20.10.5.tgz'; \
+			url="https://download.docker.com/linux/static/stable/armhf/docker-${DOCKER_VERSION}.tgz"; \
 			;; \
 		'aarch64') \
-			url='https://download.docker.com/linux/static/stable/aarch64/docker-20.10.5.tgz'; \
+			url="https://download.docker.com/linux/static/stable/aarch64/docker-${DOCKER_VERSION}.tgz"; \
 			;; \
 		*) echo >&2 "error: unsupported architecture ($apkArch)"; exit 1 ;; \
 	esac; \
@@ -47,15 +47,12 @@ RUN set -eux; \
 		--strip-components 1 \
 		--directory /usr/local/bin/ \
 	; \
-	rm docker.tgz; \
-	\
-	dockerd --version; \
-	docker --version
+	rm docker.tgz
 
 ARG BUILDX_VERSION=0.5.1
-ARG TARGETARCH
+ARG TARGETPLATFORM
 RUN mkdir -p ~/.docker/cli-plugins && \
-    wget -qO ~/.docker/cli-plugins/docker-buildx https://github.com/docker/buildx/releases/download/v${BUILDX_VERSION}/buildx-v${BUILDX_VERSION}.linux-${TARGETARCH} && \
+    wget -O ~/.docker/cli-plugins/docker-buildx https://github.com/docker/buildx/releases/download/v${BUILDX_VERSION}/buildx-v${BUILDX_VERSION}.${TARGETPLATFORM//\//-} && \
     chmod a+x ~/.docker/cli-plugins/docker-buildx
 
 LABEL org.opencontainers.image.source=https://github.com/docker-multiarch/docker-buildx \
