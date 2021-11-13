@@ -51,7 +51,7 @@ RUN set -eux; \
 	; \
 	rm docker.tgz
 
-ARG BUILDX_VERSION=0.6.3
+ARG BUILDX_VERSION=0.7.0
 ARG TARGETPLATFORM
 RUN mkdir -p ~/.docker/cli-plugins && \
     wget -O ~/.docker/cli-plugins/docker-buildx https://github.com/docker/buildx/releases/download/v${BUILDX_VERSION}/buildx-v${BUILDX_VERSION}.${TARGETPLATFORM//\//-} && \
