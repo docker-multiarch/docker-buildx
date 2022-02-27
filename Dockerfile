@@ -3,7 +3,7 @@
 # to add the Buildx CLI plugin.
 #
 
-FROM alpine:3.14
+FROM alpine:3.15
 
 RUN apk add --no-cache \
 		ca-certificates \
@@ -51,7 +51,7 @@ RUN set -eux; \
 	; \
 	rm docker.tgz
 
-ARG BUILDX_VERSION=0.7.1
+ARG BUILDX_VERSION=0.8.0-rc1
 ARG TARGETPLATFORM
 RUN mkdir -p ~/.docker/cli-plugins && \
     wget -O ~/.docker/cli-plugins/docker-buildx https://github.com/docker/buildx/releases/download/v${BUILDX_VERSION}/buildx-v${BUILDX_VERSION}.${TARGETPLATFORM//\//-} && \
