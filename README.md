@@ -1,3 +1,8 @@
+# ⚠️ DEPRECATED ⚠️
+
+The Buildx plugin is now available in the official Docker image since `20.10.16`, see
+https://github.com/docker-library/docker/pull/361.
+
 # Docker with Buildx
 
 ![Docker](https://github.com/docker-multiarch/docker-buildx/actions/workflows/docker.yaml/badge.svg)
